@@ -16,8 +16,8 @@ public class ShiftsManagerUI {
 
         System.out.println(myShiftsManager.report());
 
-     myShiftsManager.sortByName();
-
+        myShiftsManager.sortByName();
+        System.out.println("\nLista Circular ordenada:\n");
         System.out.println(myShiftsManager.report());
 
     }

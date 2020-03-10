@@ -88,10 +88,10 @@ public class ShiftsManager {
     }
 
     public String report() {
-        String report = firstShiftType.getName() + " ";
+        String report = firstShiftType.getName() + "\n";
 
         for (ShiftType s = firstShiftType.getNextShiftType(); s != firstShiftType; s = s.getNextShiftType()) {
-            report += s.getName() + " ";
+            report += s.getName() + "\n";
         }
 
         return report;
