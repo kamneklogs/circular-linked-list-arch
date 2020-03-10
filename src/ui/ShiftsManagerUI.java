@@ -14,10 +14,11 @@ public class ShiftsManagerUI {
         myShiftsManager.addShiftType("quejas", 2799);
         myShiftsManager.addShiftType("peticiones", 213232);
 
+        System.out.println("\nLista Circular sin ordenar:\n");
         System.out.println(myShiftsManager.report());
 
         myShiftsManager.sortByName();
-        System.out.println("\nLista Circular ordenada:\n");
+        System.out.println("\nLista Circular ordenada con bubble sort:\n");
         System.out.println(myShiftsManager.report());
 
     }
