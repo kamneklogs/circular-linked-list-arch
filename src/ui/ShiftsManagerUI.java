@@ -20,6 +20,7 @@ public class ShiftsManagerUI {
 
         myShiftsManager.removeShiftType("peticiones");
         System.out.println(myShiftsManager.report());
+        
 
     }
 
