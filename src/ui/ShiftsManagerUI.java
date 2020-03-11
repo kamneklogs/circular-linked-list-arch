@@ -22,17 +22,20 @@ public class ShiftsManagerUI {
 
         
 
-        myShiftsManager.addPerson("carlos", "123");
-        myShiftsManager.addPerson("andre", "221");
-        myShiftsManager.addPerson("aro", "34");
-        myShiftsManager.addPerson("asdw", "4353");
-        myShiftsManager.addPerson("ewwca", "14345");
-        myShiftsManager.addPerson("awdc", "123324");
-        myShiftsManager.addPerson("rgae", "2143345");
+        myShiftsManager.addPerson("carlos", "a");
+        myShiftsManager.addPerson("andre", "d");
+        myShiftsManager.addPerson("aro", "g");
+        myShiftsManager.addPerson("asdw", "i");
+        myShiftsManager.addPerson("ewwca", "h");
+        myShiftsManager.addPerson("awdc", "b");
+        myShiftsManager.addPerson("rgae", "c");
 
-        System.out.println(myShiftsManager.reportPeople());
+        System.out.println(myShiftsManager.reportPerson());
 
-        System.out.println(myShiftsManager.searchPerson("123").getName());
+        myShiftsManager.selectionSortById();
+
+        System.out.println(myShiftsManager.reportPerson());
+
 
     }
 

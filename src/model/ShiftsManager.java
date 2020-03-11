@@ -143,7 +143,7 @@ public class ShiftsManager {
     }
 
     public String report() {
-        String report =  " || " + firstShiftType.getName() + " || ";
+        String report = " || " + firstShiftType.getName() + " || ";
 
         for (ShiftType s = firstShiftType.getNextShiftType(); s != firstShiftType; s = s.getNextShiftType()) {
             report += s.getName() + " || ";
@@ -152,22 +152,20 @@ public class ShiftsManager {
         return report;
     }
 
-    public void removeTimeGreaterThan(Double timeLimit){
+    public void removeTimeGreaterThan(Double timeLimit) {
 
         ArrayList<String> shiftTypesToRemove = new ArrayList<String>();
 
-        if(firstShiftType.getTime() > timeLimit){
+        if (firstShiftType.getTime() > timeLimit) {
             shiftTypesToRemove.add(firstShiftType.getName());
         }
 
-        for (ShiftType s = firstShiftType.getNextShiftType();s != firstShiftType; s = s.getNextShiftType()) {
-            if(s.getTime() > timeLimit ){
+        for (ShiftType s = firstShiftType.getNextShiftType(); s != firstShiftType; s = s.getNextShiftType()) {
+            if (s.getTime() > timeLimit) {
                 shiftTypesToRemove.add(s.getName());
             }
-            
-        }
 
-        
+        }
 
         for (String s : shiftTypesToRemove) {
             removeShiftType(s);
@@ -195,31 +193,99 @@ public class ShiftsManager {
 
     }
 
-    public Person searchPerson(String id){
+    public Person searchPerson(String id) {
 
-        for (Person p = people; p != null; p = p.getNextPerson()) {
-            if(p.getId().equals(id)){
-                return p;
+        for (Person current = people; current != null; current = current.getNextPerson()) {
+            if (current.getId().equals(id)) {
+                return current;
             }
         }
-        
+
         return null;
     }
 
-    public void selectionSortById(){
+    public void selectionSortById() {
+
+        Person p = people.getNextPerson();
+        Person max = p.getNextPerson();
+        boolean flag;
+        while (p != null) {
+
+            flag = true;
+            while (flag == true && p.getPrevPerson() != null) {
+                flag = false;
+                if (p.getPrevPerson().getId().compareTo(p.getId()) > 1) {
 
 
-        
+                    Person s = null, r = null, q = p, newP = p.getPrevPerson();
+                    if (newP.getNextPerson() != q) {
+                        s = newP.getNextPerson();
+                        r = q.getPrevPerson();
+                    }
+                    newP.setNextPerson(q.getNextPerson());
+                    q.setPrevPerson(newP.getPrevPerson());
+                    if (q.getNextPerson() != null) {
+                        q.getNextPerson().setPrevPerson(newP);
+                    }
+                    if (newP.getPrevPerson() != null) {
+                        newP.getPrevPerson().setNextPerson(q);
+                    } else {
+                        people = q;
+                    }
+                    if (s != null && r != null) {
+                        r.setNextPerson(newP);
+                        s.setPrevPerson(q);
+                        q.setNextPerson(s);
+                        newP.setPrevPerson(r);
+                    } else {
+                        q.setNextPerson(newP);
+                        newP.setPrevPerson(q);
+                    }
 
+                    flag = true;
+                }else if(p.getPrevPerson().getId().compareTo(p.getId()) < 1){
 
+                    Person s = null, r = null, q = p.getPrevPerson(), newP = p;
+                    if (newP.getNextPerson() != q) {
+                        s = newP.getNextPerson();
+                        r = q.getPrevPerson();
+                    }
+                    newP.setNextPerson(q.getNextPerson());
+                    q.setPrevPerson(newP.getPrevPerson());
+                    if (q.getNextPerson() != null) {
+                        q.getNextPerson().setPrevPerson(newP);
+                    }
+                    if (newP.getPrevPerson() != null) {
+                        newP.getPrevPerson().setNextPerson(q);
+                    } else {
+                        people = q;
+                    }
+                    if (s != null && r != null) {
+                        r.setNextPerson(newP);
+                        s.setPrevPerson(q);
+                        q.setNextPerson(s);
+                        newP.setPrevPerson(r);
+                    } else {
+                        q.setNextPerson(newP);
+                        newP.setPrevPerson(q);
+                    }
 
+                    flag = true;
+
+                }
+            }
+            p = max;
+            if (p != null) {
+                max = p.getNextPerson();
+            }
+        }
     }
 
-    public String reportPeople(){
+    public String reportPerson() {
         String s = "";
 
-        for (Person p = people; p != null; p = p.getNextPerson()) {
-            s += " || " + p.getName() + " || " ;
+        for (Person current = people; current != null; current = current.getNextPerson()) {
+            s += " || " + current.getName() + " " +  current.getId() + " || ";
         }
 
         return s;
