@@ -77,6 +77,7 @@ public class ShiftsManager {
                 previous.setNextShiftType(current.getNextShiftType());
             }
 
+            
         }
 
         return current;
