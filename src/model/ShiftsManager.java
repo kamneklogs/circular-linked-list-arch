@@ -3,6 +3,7 @@ package model;
 public class ShiftsManager {
 
     private ShiftType firstShiftType;
+    private Person people;
 
     public ShiftsManager() {
 
@@ -77,7 +78,6 @@ public class ShiftsManager {
                 previous.setNextShiftType(current.getNextShiftType());
             }
 
-            
         }
 
         return current;
@@ -148,6 +148,26 @@ public class ShiftsManager {
         }
 
         return report;
+    }
+
+    public void addPerson(String name, String id) {
+        Person newPerson = new Person(name, id);
+
+        if (people == null) {
+            people = newPerson;
+        } else {
+
+            Person current = people;
+
+            while (current.getNextPerson() != null) {
+                current = current.getNextPerson();
+            }
+
+            current.setNextPerson(newPerson);
+            newPerson.setPrevPerson(current);
+
+        }
+
     }
 
 }
