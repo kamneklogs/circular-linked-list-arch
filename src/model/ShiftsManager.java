@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class ShiftsManager {
 
     private ShiftType firstShiftType;
@@ -141,13 +143,36 @@ public class ShiftsManager {
     }
 
     public String report() {
-        String report = firstShiftType.getName() + "\n";
+        String report =  " || " + firstShiftType.getName() + " || ";
 
         for (ShiftType s = firstShiftType.getNextShiftType(); s != firstShiftType; s = s.getNextShiftType()) {
-            report += s.getName() + "\n";
+            report += s.getName() + " || ";
         }
 
         return report;
+    }
+
+    public void removeTimeGreaterThan(Double timeLimit){
+
+        ArrayList<String> shiftTypesToRemove = new ArrayList<String>();
+
+        if(firstShiftType.getTime() > timeLimit){
+            shiftTypesToRemove.add(firstShiftType.getName());
+        }
+
+        for (ShiftType s = firstShiftType.getNextShiftType();s != firstShiftType; s = s.getNextShiftType()) {
+            if(s.getTime() > timeLimit ){
+                shiftTypesToRemove.add(s.getName());
+            }
+            
+        }
+
+        
+
+        for (String s : shiftTypesToRemove) {
+            removeShiftType(s);
+        }
+
     }
 
     public void addPerson(String name, String id) {
@@ -168,6 +193,36 @@ public class ShiftsManager {
 
         }
 
+    }
+
+    public Person searchPerson(String id){
+
+        for (Person p = people; p != null; p = p.getNextPerson()) {
+            if(p.getId().equals(id)){
+                return p;
+            }
+        }
+        
+        return null;
+    }
+
+    public void selectionSortById(){
+
+
+        
+
+
+
+    }
+
+    public String reportPeople(){
+        String s = "";
+
+        for (Person p = people; p != null; p = p.getNextPerson()) {
+            s += " || " + p.getName() + " || " ;
+        }
+
+        return s;
     }
 
 }
