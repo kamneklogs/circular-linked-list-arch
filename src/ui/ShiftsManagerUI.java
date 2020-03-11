@@ -17,8 +17,8 @@ public class ShiftsManagerUI {
         System.out.println("\nLista Circular sin ordenar:\n");
         System.out.println(myShiftsManager.report());
 
-        myShiftsManager.sortByName();
-        System.out.println("\nLista Circular ordenada con bubble sort:\n");
+
+        myShiftsManager.removeShiftType("peticiones");
         System.out.println(myShiftsManager.report());
 
     }

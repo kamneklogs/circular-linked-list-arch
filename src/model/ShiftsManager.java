@@ -31,7 +31,59 @@ public class ShiftsManager {
 
     }
 
-    public void sortByName() {
+    public ShiftType searchShiftType(String name) {
+
+        ShiftType result = null;
+
+        for (ShiftType s = firstShiftType; s.getNextShiftType() != firstShiftType; s = s.getNextShiftType()) {
+
+            if (s.getName().equals(name)) {
+                result = s;
+                break;
+            }
+
+        }
+
+        return result;
+
+    }
+
+    public ShiftType removeShiftType(String name) {
+
+        ShiftType current = firstShiftType;
+
+        if (current.getName().equals(name)) {
+
+            ShiftType lastShiftType = current.getNextShiftType();
+
+            while (lastShiftType.getNextShiftType() != firstShiftType) {
+                lastShiftType = lastShiftType.getNextShiftType();
+            }
+
+            lastShiftType.setNextShiftType(firstShiftType.getNextShiftType());
+
+            firstShiftType = firstShiftType.getNextShiftType();
+
+        } else {
+
+            ShiftType previous = null;
+
+            while (!current.getName().equals(name) && current.getNextShiftType() != firstShiftType) {
+                previous = current;
+                current = current.getNextShiftType();
+            }
+
+            if (current.getName().equals(name)) {
+                previous.setNextShiftType(current.getNextShiftType());
+            }
+
+        }
+
+        return current;
+
+    }
+
+    public void bubbleSortByName() {
 
         ShiftType currentType = firstShiftType;
 
